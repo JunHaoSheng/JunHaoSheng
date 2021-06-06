@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>三栏布局</title>
+  <style>
+    /* 1、float */
+    .con div {
+      /*元素最小高度*/
+      min-height: 100px;
+    }
+
+    /* .left {
+      float: left;
+      width: 200px;
+      background-color: aqua;
+    }
+
+    .right {
+      float: right;
+      width: 200px;
+      background-color: tomato;
+    }
+
+    .center {
+      float元素脱标， margin-left 为了避免重叠 
+      margin-left: 200px;
+      margin-right: 200px;
+      background-color: violet;
+    } */
+    /* 2、absolute定位布局 */
+    /* .left {
+      position: absolute;
+      left: 0;
+      width: 200px;
+      background-color: aqua;
+    }
+
+    .right {
+      position: absolute;
+      right: 0;
+      width: 200px;
+      background-color: tomato;
+    }
+
+    .center {
+      position: absolute;
+      left: 200px;
+      right: 200px;
+      background-color: violet;
+    } */
+    /* 3、flex布局 */
+    /* .con {
+      display: flex;
+    }
+
+    .left {
+      width: 200px;
+      background-color: aqua;
+    }
+
+    .right {
+      width: 200px;
+      background-color: tomato;
+    }
+
+    .center {
+      flex: 1;
+      background-color: violet;
+    } */
+    /* 4、table布局 */
+    /* .con {
+      width: 100%;
+      display: table;
+    }
+
+    .left {
+      width: 200px;
+      display: table-cell;
+      background-color: aqua;
+    }
+
+    .right {
+      width: 200px;
+      display: table-cell;
+      background-color: tomato;
+    }
+
+    .center {
+      display: table-cell;
+      background-color: violet;
+    } */
+    /* 4、table布局 */
+    .con {
+      width: 100%;
+      display: grid;
+      grid-template-rows: 100px;
+      grid-template-columns: 200px auto 200px;
+    }
+
+    .left {
+      /* width: 200px; */
+      background-color: aqua;
+    }
+
+    .right {
+      background-color: tomato;
+    }
+
+    .center {
+      background-color: violet;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="con">
+    <div class="left">左</div>
+    <div class="center">
+      <h2>float布局</h2>
+      中<br>增加高度<br> 增加高度<br>
+      增加高度
+    </div>
+    <div class="right">右</div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sort</title>
+</head>
+
+<body>
+  <h1>排序</h1>
+  <script>
+    let arr = [];
+    for (let i = 0; i < 10; i++) {
+      arr[i] = Math.floor(Math.random() * 101);
+    }
+    console.log("before sort:", arr);
+    // 插入排序
+    /*        
+    function insertSort(nums) {
+        for (let i = 1; i < nums.length; i++) {
+            let preindex = i - 1;
+            let cur = nums[i];
+            while (preindex >= 0 && nums[preindex] > cur) {
+                nums[preindex + 1] = nums[preindex]
+                preindex--
+            }
+            nums[preindex + 1] = cur;
+        }
+        console.log("after sort:" + nums);
+        return nums
+    }
+    insertSort(arr) 
+    */
+    // 希尔排序
+    /* 
+    function shellSort(nums) {
+        for (let gap = Math.floor(nums.length / 2); gap > 0; gap = Math.floor(gap / 2)) {
+            for (let i = gap; i < nums.length; i++) {
+                let j = i;
+                let cur = nums[i]; //保存当前元素和索引号
+                while (j - gap >= 0 && cur < nums[j - gap]) {
+                    nums[j] = nums[j - gap];    //交换，前后元素的值
+                    j = j - gap;                //交换，前后元素的索引号
+                }
+                nums[j] = cur;
+            }
+        }
+        console.log("after sort:", nums)
+        return nums
+    }
+    shellSort (arr)
+*/
+    // 归并排序：	
+    //先递归一分为2，再归并的同时，比较两个子序列中元素大小进行排序
+    /* 	
+    function mergeSort(nums) {
+      let len = nums.length;
+      if (len < 2) return nums	//递归出口
+      let middle = Math.floor(len / 2);	//找中间点
+      let left = nums.slice(0, middle);	//一分为二
+      let right = nums.slice(middle);
+      return merge(mergeSort(left), mergeSort(right))	//递归开始，合并左右子序列
+
+    }
+    function merge(left, right) {
+      let res = [];
+      while (left.length > 0 && right.length > 0) {	//左右子序列有值，进行循环比较，压入结果数组
+        if (left[0] <= right[0]) {
+          res.push(left.shift())
+        } else {
+          res.push(right.shift())
+        }
+      }
+      while (left.length) {		//左序列剩余值
+        res.push(left.shift())
+      }
+      while (right.length) {	//右序列剩余值
+        res.push(right.shift())
+      }
+      return res
+    }
+    mergeSort(arr); 
+    */
+    // 交换函数
+    function swap(arr, i, j) {
+      let temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+      // 方法2 三次异或 交换数字   【注意：】自身交换为： 0  
+      // arr[i] = arr[i] ^ arr[j];
+      // arr[j] = arr[i] ^ arr[j];
+      // arr[i] = arr[i] ^ arr[j];
+      // return arr
+    }
+
+    // 快速排序：分区(排序、找出中心轴位置)  设置中心轴、基准，比基准小的放左边，大的放右边
+    /*    function quickSort(nums, left, right) {
+         let len = nums.length;
+         left = typeof left != 'number' ? 0 : left;
+         right = typeof right != 'number' ? len - 1 : right;
+         let partitionindex;//中心轴的索引
+         if (left < right) {
+           partitionindex = partition(nums, left, right);
+           quickSort(nums, left, partitionindex - 1)	//排列左序列
+           quickSort(nums, partitionindex + 1, right)	//排列右序列
+         }
+         return nums
+       }
+       // 分区函数
+       function partition(arr, left, right) {
+         let pivot = left;	//设置基准
+         let index = pivot + 1;	//index记录比基准小的元素的下标
+         for (let i = index; i <= right; i++) {
+           if (arr[i] < arr[pivot]) {	//当前元素<基准 交换
+             swap(arr, i, index)
+             index++;
+           }
+         }
+         swap(arr, index - 1, pivot)
+         return index - 1;
+       }
+       console.log("after sort:", quickSort(arr));
+    */
+
+    function quickSort(nums, left, right) {
+      let pivotindex;
+      left = typeof left != "number" ? 0 : left;
+      right = typeof right != "number" ? nums.length - 1 : right;
+      if (left < right) {
+        pivotindex = partition(nums, left, right);
+        quickSort(nums, left, pivotindex - 1);
+        quickSort(nums, pivotindex + 1, right);
+      }
+      return nums
+    }
+    function partition(nums, left, right) { //分区函数
+      let pivot = left;
+      let index = pivot + 1;
+      for (let i = index; i <= right; i++) {//注意【判断条件：<=】
+        if (nums[i] < nums[pivot]) {
+          swap(nums, i, index);
+          index++
+        }
+      }
+      swap(nums, pivot, index - 1);
+      return index - 1
+    }
+    console.log("after sort:", quickSort(arr));
+  </script>
+</body>
+
+</html>
